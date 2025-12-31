@@ -1,0 +1,476 @@
+/* SignInPageStyle.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+}
+
+.signInPageDiv {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  overflow: hidden;
+  background: #1a1a1a;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Background image layer */
+.signInPageDiv::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+/* Dark overlay on background */
+.signInPageDiv::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(74, 144, 226, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(120, 119, 198, 0.08) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(26, 26, 26, 0.85) 0%, rgba(45, 45, 45, 0.85) 100%);
+  z-index: 0;
+}
+
+/* Container that holds both form and graph */
+.signInContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  z-index: 1;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* When imposter detected, shift container */
+.signInContainer.imposterDetected {
+  justify-content: space-between;
+}
+
+.formDiv {
+  background: linear-gradient(145deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  padding: 45px 50px;
+  border-radius: 16px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  width: 100%;
+  max-width: 460px;
+  position: relative;
+  z-index: 1;
+  animation: slideUp 0.6s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* When imposter detected, add red glow */
+.formDiv.imposterGlow {
+  box-shadow: 
+    0 20px 60px rgba(255, 107, 107, 0.4),
+    0 0 0 1px rgba(255, 107, 107, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  animation: pulseRed 2s infinite;
+}
+
+@keyframes pulseRed {
+  0%, 100% {
+    box-shadow: 
+      0 20px 60px rgba(255, 107, 107, 0.4),
+      0 0 0 1px rgba(255, 107, 107, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  50% {
+    box-shadow: 
+      0 20px 80px rgba(255, 107, 107, 0.6),
+      0 0 0 2px rgba(255, 107, 107, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.formDiv::before {
+  content: '🔐 Secure Login';
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 32px;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inputField {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 15px;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  position: relative;
+  font-weight: 400;
+}
+
+.inputField:focus {
+  border-color: #4a90e2;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 0 0 3px rgba(74, 144, 226, 0.1),
+    0 8px 16px rgba(74, 144, 226, 0.15);
+  transform: translateY(-1px);
+}
+
+.inputField::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  font-weight: 400;
+}
+
+.inputField:focus::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 15px;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  font-family: 'Inter', sans-serif;
+}
+
+.submitBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.submitBtn:hover::before {
+  left: 100%;
+}
+
+.submitBtn:hover {
+  background: linear-gradient(135deg, #3d4a5c 0%, #2a3340 100%);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.submitBtn:active {
+  transform: translateY(0);
+}
+
+/* Error message styling */
+.errorMsgDiv {
+  color: #ff6b6b;
+  background: linear-gradient(145deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
+  backdrop-filter: blur(10px);
+  padding: 13px 22px;
+  border-radius: 10px;
+  margin-top: 16px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+  box-shadow: 
+    0 8px 24px rgba(255, 107, 107, 0.15),
+    0 0 0 1px rgba(255, 107, 107, 0.3);
+  animation: shake 0.5s ease-in-out;
+  border-left: 3px solid #ff6b6b;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+.errorMsgDiv:empty {
+  display: none;
+}
+
+.errorMsgDiv::before {
+  content: '⚠️ ';
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+/* Graph/Analysis Container - Initially hidden */
+.graphContainer {
+  width: 0;
+  max-width: 0;
+  height: 500px;
+  background: linear-gradient(145deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+/* When imposter detected, show graph */
+.graphContainer.show {
+  width: 100%;
+  max-width: 550px;
+  opacity: 1;
+  animation: slideInRight 0.6s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.graphContainer::before {
+  content: '📊 Typing Pattern Analysis';
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding: 30px 30px 20px 30px;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+.graphContent {
+  padding: 0 30px 30px 30px;
+  height: calc(100% - 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.graphImagePlaceholder {
+  width: 100%;
+  height: 280px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.graphImagePlaceholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.graphImagePlaceholder::after {
+  content: 'Graph Placeholder';
+  position: absolute;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.analysisText {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 1.6;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 3px solid #ff6b6b;
+}
+
+.analysisText strong {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .signInContainer {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .signInContainer.imposterDetected {
+    justify-content: center;
+  }
+
+  .graphContainer.show {
+    max-width: 460px;
+    height: 450px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signInPageDiv {
+    padding: 15px;
+  }
+
+  .formDiv {
+    padding: 35px 30px;
+    max-width: 100%;
+  }
+
+  .formDiv::before {
+    font-size: 21px;
+    margin-bottom: 26px;
+  }
+
+  .inputField {
+    padding: 13px 16px;
+    font-size: 14px;
+  }
+
+  .submitBtn {
+    padding: 13px;
+    font-size: 14px;
+  }
+
+  .graphContainer {
+    height: 400px;
+  }
+
+  .graphContainer::before {
+    font-size: 18px;
+    padding: 25px 20px 15px 20px;
+  }
+
+  .graphContent {
+    padding: 0 20px 25px 20px;
+  }
+
+  .graphImagePlaceholder {
+    height: 220px;
+  }
+
+  .analysisText {
+    font-size: 13px;
+  }
+}
+
+/* Loading animation for button */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.submitBtn.loading::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 50%;
+  left: 50%;
+  margin-left: -9px;
+  margin-top: -9px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+
+.signInForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signInForm input{
+    width: 90%;
+}
